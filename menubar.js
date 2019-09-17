@@ -121,15 +121,12 @@ var menubar = {
     },
     handleNew: function(e){
 
-
         newmodal.show();
-        this.closeAllMenus(e);
-
+        this.closeAllMenus();
 
     },
-    closeAllMenus: function(e){
+    closeAllMenus: function(){
 
-                  e.stopPropagation();
                   let dropmenus = this.el.querySelectorAll(".dropmenu");
                   for(let i = 0; i < dropmenus.length; i ++ ){
 

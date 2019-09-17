@@ -30,6 +30,7 @@ var editor = {
         this.status = this.$el.querySelector('#status');
     },
     setStyles: function(){
+        
         this.tfield.style.fontSize = "20px";
         this.tfield.style.lineHeight = 1;
 
