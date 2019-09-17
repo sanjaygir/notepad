@@ -31,6 +31,7 @@ var newmodal = {
     },
     cacheDom: function() {
 
+
         this.el = document.querySelector('#modal');
         this.heading = this.el.querySelector('#mheading');
         this.body = this.el.querySelector("#mbody");
