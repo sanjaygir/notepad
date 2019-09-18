@@ -1,4 +1,4 @@
-var newmodal = {
+var openmodal = {
     init: function() {
         this.s_x = 0;
         this.s_y = 0;
@@ -13,31 +13,49 @@ var newmodal = {
     },
     createView: function(){
 
+
+        let opts = ``;
+
+        for (let i=0; i< localStorage.length; i++) {
+            let key = localStorage.key(i);
+            opts += `<option>${key}</option>`;
+
+        }
+
+        let sel = `<select id="fname" size="${localStorage.length}"> ${opts} </select>`;
+
         let temp = `
                 <div id="mheading">
-                    New &nbsp;&nbsp;&nbsp;&nbsp;<span id="close">x</span>
+                    Open &nbsp;&nbsp;&nbsp;&nbsp;<span id="close">x</span>
                 </div>
                 <div id = "mbody">
-                  <p> Are you sure you would like to clear the document? </p>
 
-                  <button id="yes">Yes</button>
-                  <button id="no">No</button>
+                  <label>Please select the document you want to open? </label>
+                  <br>
+                  <br>
+
+
+                  ${sel}
+                  <button id="open">Open</button>
 
                 </div>`;
 
-            document.querySelector('#newmodal').innerHTML = temp;
+
+
+
+            document.querySelector('#openmodal').innerHTML = temp;
 
 
     },
     cacheDom: function() {
 
-
-        this.el = document.querySelector('#newmodal');
+        this.el = document.querySelector('#openmodal');
         this.heading = this.el.querySelector('#mheading');
         this.body = this.el.querySelector("#mbody");
         this.close = this.el.querySelector('#close');
-        this.yesbutton = this.el.querySelector("#yes");
-        this.nobutton = this.el.querySelector("#no");
+        this.filename = this.el.querySelector('#fname');
+        this.openbutton = this.el.querySelector("#open");
+
 
     },
     setStyles: function(){
@@ -58,7 +76,6 @@ var newmodal = {
 
         this.body.style.padding = "10px";
 
-
         this.close.style.cursor = "auto";
 
     },
@@ -67,9 +84,8 @@ var newmodal = {
         this.el.addEventListener("mousedown", this.handleDown.bind(this));
         this.close.addEventListener("click", this.handleCloseClick.bind(this));
 
-
-        this.yesbutton.addEventListener("click", this.handleYes.bind(this));
-        this.nobutton.addEventListener("click", this.handleNo.bind(this));
+        this.openbutton.addEventListener("click", this.handleOpen.bind(this));
+        //this.nobutton.addEventListener("click", this.handleNo.bind(this));
 
         //this.tfield.addEventListener('input', this.updateStatus.bind(this));
         //this.$ul.delegate('i.del', 'click', this.deletePerson.bind(this));
@@ -78,9 +94,18 @@ var newmodal = {
     handleCloseClick: function(){
       this.hide();
     },
-    handleYes: function(){
+    handleOpen: function(){
 
-        editor.clearContent();
+        //localStorage.setItem(this.filename.value, editor.tfield.innerHTML);
+
+
+        let data = localStorage.getItem(this.filename.value);
+    		if(data){
+    			editor.tfield.innerHTML = data;
+    		}
+
+        //alert(this.filename.value);
+        //editor.clearContent();
         this.hide();
 
 

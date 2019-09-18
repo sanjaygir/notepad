@@ -6,7 +6,11 @@
 editor.init();
 
 newmodal.init();
+savemodal.init();
+openmodal.init();
+
 menubar.init();
+
 
 document.addEventListener("click", function(e){
 

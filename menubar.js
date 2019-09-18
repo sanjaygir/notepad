@@ -13,9 +13,9 @@ var menubar = {
                     <li>File
                       <ul class="dropmenu">
                           <li id="new"> New </li>
-                          <li> Open </li>
+                          <li id="open"> Open </li>
                           <li> Save </li>
-                          <li> Save As </li>
+                          <li id="saveas"> Save As </li>
                           <li> Page Setup </li>
                           <li> Print </li>
                           <li> Exit </li>
@@ -115,6 +115,8 @@ var menubar = {
 
 
             this.el.querySelector('#new').addEventListener("click", this.handleNew.bind(this));
+            this.el.querySelector('#saveas').addEventListener("click", this.handleSaveAs.bind(this));
+            this.el.querySelector('#open').addEventListener("click", this.handleOpen.bind(this));
 
 
 
@@ -124,6 +126,16 @@ var menubar = {
         newmodal.show();
         this.closeAllMenus();
 
+    },
+    handleSaveAs: function(e){
+
+        savemodal.show();
+        this.closeAllMenus();
+
+    },
+    handleOpen: function(e){
+      openmodal.show();
+      this.closeAllMenus();
     },
     closeAllMenus: function(){
 
