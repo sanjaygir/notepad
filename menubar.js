@@ -123,18 +123,28 @@ var menubar = {
     },
     handleNew: function(e){
 
+      newmodal.init();
+
         newmodal.show();
+
         this.closeAllMenus();
 
     },
     handleSaveAs: function(e){
 
+      savemodal.init();
+
         savemodal.show();
+
         this.closeAllMenus();
 
     },
     handleOpen: function(e){
+
+      openmodal.init();
+
       openmodal.show();
+
       this.closeAllMenus();
     },
     closeAllMenus: function(){

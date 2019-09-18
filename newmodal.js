@@ -64,7 +64,7 @@ var newmodal = {
     },
     bindEvents: function() {
 
-        this.el.addEventListener("mousedown", this.handleDown.bind(this));
+        this.heading.addEventListener("mousedown", this.handleDown.bind(this));
         this.close.addEventListener("click", this.handleCloseClick.bind(this));
 
 
