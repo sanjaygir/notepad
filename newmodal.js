@@ -71,8 +71,6 @@ var newmodal = {
         this.yesbutton.addEventListener("click", this.handleYes.bind(this));
         this.nobutton.addEventListener("click", this.handleNo.bind(this));
 
-        //this.tfield.addEventListener('input', this.updateStatus.bind(this));
-        //this.$ul.delegate('i.del', 'click', this.deletePerson.bind(this));
 
     },
     handleCloseClick: function(){
@@ -118,15 +116,12 @@ var newmodal = {
     },
     handleUp: function(e){
 
-      console.log("mouse is up");
-
         document.removeEventListener("mouseup", this.upHandler);
         document.removeEventListener("mousemove", this.moveHandler);
 
     },
     show:function(){
 
-      //this.render();
 
       this.el.style.display = "block";
       this.el.style.top = (window.innerHeight / 2 - 100) + "px";

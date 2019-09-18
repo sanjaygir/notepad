@@ -50,7 +50,6 @@ var savemodal = {
         this.el.style.textAlign = "center";
         this.el.style.boxShadow = "5px 5px grey";
 
-        //this.heading.style.padding = "10px";
         this.heading.style.cursor = "move";
         this.heading.style.backgroundColor = "#2196F3";
         this.heading.style.color = "#fff";
@@ -68,10 +67,6 @@ var savemodal = {
         this.close.addEventListener("click", this.handleCloseClick.bind(this));
 
         this.savebutton.addEventListener("click", this.handleSave.bind(this));
-        //this.nobutton.addEventListener("click", this.handleNo.bind(this));
-
-        //this.tfield.addEventListener('input', this.updateStatus.bind(this));
-        //this.$ul.delegate('i.del', 'click', this.deletePerson.bind(this));
 
     },
     handleCloseClick: function(){
@@ -81,7 +76,6 @@ var savemodal = {
 
         localStorage.setItem(this.filename.value, editor.tfield.innerHTML);
 
-        //editor.clearContent();
         this.hide();
 
 
@@ -119,7 +113,6 @@ var savemodal = {
     },
     handleUp: function(e){
 
-      console.log("mouse is up");
 
         document.removeEventListener("mouseup", this.upHandler);
         document.removeEventListener("mousemove", this.moveHandler);
@@ -127,7 +120,6 @@ var savemodal = {
     },
     show:function(){
 
-      //this.render();
 
       this.el.style.display = "block";
       this.el.style.top = (window.innerHeight / 2 - 100) + "px";

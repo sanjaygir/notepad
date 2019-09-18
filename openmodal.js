@@ -3,6 +3,8 @@ var openmodal = {
         this.s_x = 0;
         this.s_y = 0;
 
+        this.currentOpenedFile = "";
+
         this.createView();
         this.cacheDom();
         this.setStyles();
@@ -67,7 +69,6 @@ var openmodal = {
         this.el.style.textAlign = "center";
         this.el.style.boxShadow = "5px 5px grey";
 
-        //this.heading.style.padding = "10px";
         this.heading.style.cursor = "move";
         this.heading.style.backgroundColor = "#2196F3";
         this.heading.style.color = "#fff";
@@ -85,10 +86,6 @@ var openmodal = {
         this.close.addEventListener("click", this.handleCloseClick.bind(this));
 
         this.openbutton.addEventListener("click", this.handleOpen.bind(this));
-        //this.nobutton.addEventListener("click", this.handleNo.bind(this));
-
-        //this.tfield.addEventListener('input', this.updateStatus.bind(this));
-        //this.$ul.delegate('i.del', 'click', this.deletePerson.bind(this));
 
     },
     handleCloseClick: function(){
@@ -96,16 +93,15 @@ var openmodal = {
     },
     handleOpen: function(){
 
-        //localStorage.setItem(this.filename.value, editor.tfield.innerHTML);
-
 
         let data = localStorage.getItem(this.filename.value);
     		if(data){
     			editor.tfield.innerHTML = data;
     		}
 
-        //alert(this.filename.value);
-        //editor.clearContent();
+        this.currentOpenedFile = this.filename.value;
+
+
         this.hide();
 
 
@@ -143,7 +139,6 @@ var openmodal = {
     },
     handleUp: function(e){
 
-      console.log("mouse is up");
 
         document.removeEventListener("mouseup", this.upHandler);
         document.removeEventListener("mousemove", this.moveHandler);
@@ -151,7 +146,6 @@ var openmodal = {
     },
     show:function(){
 
-      //this.render();
 
       this.el.style.display = "block";
       this.el.style.top = (window.innerHeight / 2 - 100) + "px";

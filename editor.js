@@ -30,14 +30,13 @@ var editor = {
         this.status = this.$el.querySelector('#status');
     },
     setStyles: function(){
-        
+
         this.tfield.style.fontSize = "20px";
         this.tfield.style.lineHeight = 1;
 
     },
     bindEvents: function() {
         this.tfield.addEventListener('input', this.updateStatus.bind(this));
-        //this.$ul.delegate('i.del', 'click', this.deletePerson.bind(this));
 
     },
     render: function() {
@@ -45,7 +44,6 @@ var editor = {
     },
     updateStatus: function(){
         this.status.innerHTML = `Total characters = ${this.tfield.innerText.length}`;
-        //this.tfield.innerText = this.tfield.innerText;
 
     },
     clearContent: function(){

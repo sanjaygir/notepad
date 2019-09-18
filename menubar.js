@@ -14,12 +14,9 @@ var menubar = {
                       <ul class="dropmenu">
                           <li id="new"> New </li>
                           <li id="open"> Open </li>
-                          <li> Save </li>
+                          <li id="save"> Save </li>
                           <li id="saveas"> Save As </li>
-                          <li> Page Setup </li>
-                          <li> Print </li>
-                          <li> Exit </li>
-
+                          <li id="exit"> Exit </li>
                       </ul>
 
                     </li>
@@ -116,46 +113,78 @@ var menubar = {
 
             this.el.querySelector('#new').addEventListener("click", this.handleNew.bind(this));
             this.el.querySelector('#saveas').addEventListener("click", this.handleSaveAs.bind(this));
+            this.el.querySelector('#save').addEventListener("click", this.handleSave.bind(this));
+
             this.el.querySelector('#open').addEventListener("click", this.handleOpen.bind(this));
 
+            this.el.querySelector('#exit').addEventListener("click", this.handleExit.bind(this));
 
 
     },
     handleNew: function(e){
 
+      e.stopPropagation();
       newmodal.init();
+      newmodal.show();
+      this.closeAllMenus();
 
-        newmodal.show();
-
-        this.closeAllMenus();
 
     },
+
+    handleSave: function(e){
+      e.stopPropagation();
+
+      localStorage.setItem(openmodal.currentOpenedFile, editor.tfield.innerHTML);
+
+      this.closeAllMenus();
+
+    },
+
     handleSaveAs: function(e){
+
+      e.stopPropagation();
 
       savemodal.init();
 
-        savemodal.show();
+      savemodal.show();
 
-        this.closeAllMenus();
+      this.closeAllMenus();
 
     },
     handleOpen: function(e){
+
+      e.stopPropagation();
 
       openmodal.init();
 
       openmodal.show();
 
       this.closeAllMenus();
+
+    },
+    handleExit: function(e){
+
+      e.stopPropagation();
+
+      this.closeAllMenus();
+
+
+      if (confirm("Close Notepad?")) {
+        window.close();
+      }
+
+
+
     },
     closeAllMenus: function(){
 
-                  let dropmenus = this.el.querySelectorAll(".dropmenu");
-                  for(let i = 0; i < dropmenus.length; i ++ ){
+          let dropmenus = this.el.querySelectorAll(".dropmenu");
+          for(let i = 0; i < dropmenus.length; i ++ ){
 
-                      dropmenus[i].style.display = "none";
+              dropmenus[i].style.display = "none";
 
 
-                  }
+          }
 
     },
     displayMenu: function(ii){
