@@ -5,21 +5,11 @@ var editor = {
         this.setStyles();
         this.bindEvents();
         this.render();
+        this.history = [];
     },
     createView: function(){
 
-      let temp = `
-      <div id = "tarea" contenteditable="true" style="word-break: break-all; height: 400px; overflow:scroll;">
-
-        This is a editable section
-
-      </div>
-
-      <p id="status">
-      </p>
-
-
-      `;
+      let temp = `<div id = "tarea" contenteditable="true" style="word-break: break-all; height: 400px; overflow:scroll;"></div><p id="status"></p>`;
 
         document.querySelector('#editor').innerHTML = temp;
 
@@ -42,7 +32,14 @@ var editor = {
     render: function() {
 
     },
+    undo: function(){
+        this.tfield.innerHTML = this.history.pop();
+
+    },
     updateStatus: function(){
+
+        this.history.push(this.tfield.innerHTML);
+
         this.status.innerHTML = `Total characters = ${this.tfield.innerText.length}`;
 
     },

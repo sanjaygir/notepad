@@ -24,13 +24,23 @@ var menubar = {
                     <li>Edit
 
                       <ul class="dropmenu">
-                          <li> Undo </li>
-                          <li> Cut </li>
+                          <li id="undo"> Undo </li>
+
+                          <!--
+                          <li id="cut"> Cut </li>
                           <li> Copy </li>
-                          <li> Paste </li>
+                          <li id="paste"> Paste </li>
                           <li> Delete </li>
-                          <li> Find </li>
+                          -->
+
+
+                          <li id="find"> Find </li>
+
+
+                          <!--
                           <li> Find Next </li>
+                          -->
+
                           <li> Replace </li>
                           <li> Go to </li>
                           <li> Select All </li>
@@ -89,6 +99,9 @@ var menubar = {
       for(let i = 0; i < lis.length; i ++ ){
         lis[i].style.float = "left";
         lis[i].style.padding = "20px";
+        lis[i].style.cursor = "default";
+
+
       }
 
       let dropmenus = this.el.querySelectorAll(".dropmenu");
@@ -102,13 +115,43 @@ var menubar = {
             let lis = this.el.querySelectorAll('ul.bar > li');
             for(let i = 0; i < lis.length; i ++ ){
 
-              lis[i].addEventListener("click", function(){
+              lis[i].addEventListener("mouseover", function(e){
 
                 this.displayMenu(i);
+
+
+              }.bind(this));
+
+
+              lis[i].addEventListener("mouseout", function(e){
+
+
+                this.closeMenu(i);
 
               }.bind(this));
 
             }
+
+
+            let droplis = this.el.querySelectorAll('ul.dropmenu > li');
+
+            for(let i = 0; i < droplis.length; i ++ ){
+
+                droplis[i].addEventListener("mouseover", function(e){
+
+                  this.style.backgroundColor = "grey";
+                  this.style.cursor = "default";
+
+                });
+                droplis[i].addEventListener("mouseout", function(e){
+
+                  this.style.backgroundColor = "white";
+
+                });
+
+
+            }
+
 
 
             this.el.querySelector('#new').addEventListener("click", this.handleNew.bind(this));
@@ -118,6 +161,17 @@ var menubar = {
             this.el.querySelector('#open').addEventListener("click", this.handleOpen.bind(this));
 
             this.el.querySelector('#exit').addEventListener("click", this.handleExit.bind(this));
+
+            this.el.querySelector('#undo').addEventListener("click", this.handleUndo.bind(this));
+            this.el.querySelector('#find').addEventListener("click", this.handleFind.bind(this));
+
+
+    },
+    handleUndo: function(e){
+
+      e.stopPropagation();
+      editor.undo();
+      this.closeAllMenus();
 
 
     },
@@ -147,6 +201,18 @@ var menubar = {
       savemodal.init();
 
       savemodal.show();
+
+      this.closeAllMenus();
+
+    },
+
+    handleFind: function(e){
+
+      e.stopPropagation();
+
+      findmodal.init();
+
+      findmodal.show();
 
       this.closeAllMenus();
 
@@ -196,6 +262,19 @@ var menubar = {
 
               }
               else{
+                dropmenus[i].style.display = "none";
+
+              }
+
+            }
+
+    },
+    closeMenu: function(ii){
+
+            let dropmenus = this.el.querySelectorAll(".dropmenu");
+            for(let i = 0; i < dropmenus.length; i ++ ){
+              if(ii == i){
+
                 dropmenus[i].style.display = "none";
 
               }
