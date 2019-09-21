@@ -202,6 +202,8 @@ var menubar = {
 
       savemodal.show();
 
+      savemodal.filename.focus();
+
       this.closeAllMenus();
 
     },
@@ -213,6 +215,7 @@ var menubar = {
       findmodal.init();
 
       findmodal.show();
+      findmodal.tfield.focus();
 
       this.closeAllMenus();
 
