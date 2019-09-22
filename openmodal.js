@@ -20,7 +20,11 @@ var openmodal = {
 
         for (let i=0; i< localStorage.length; i++) {
             let key = localStorage.key(i);
-            opts += `<option>${key}</option>`;
+
+            if(!key.includes("pass-")){
+              opts += `<option>${key}</option>`;
+            }
+
 
         }
 
@@ -38,6 +42,13 @@ var openmodal = {
 
 
                   ${sel}
+                  <br>
+                  <br>
+
+                  <input type="password" placeholder="password" id="pass"></input>
+
+                  <br>
+                  <br>
                   <button id="open">Open</button>
 
                 </div>`;
@@ -56,6 +67,7 @@ var openmodal = {
         this.body = this.el.querySelector("#mbody");
         this.close = this.el.querySelector('#close');
         this.filename = this.el.querySelector('#fname');
+        this.pass = this.el.querySelector('#pass');
         this.openbutton = this.el.querySelector("#open");
 
 
@@ -92,6 +104,15 @@ var openmodal = {
       this.hide();
     },
     handleOpen: function(){
+
+        let password = localStorage.getItem("pass-" + this.filename.value);
+
+        if(password && this.pass.value != password){
+
+          alert("Wrong password!");
+          return;
+
+        }
 
 
         let data = localStorage.getItem(this.filename.value);

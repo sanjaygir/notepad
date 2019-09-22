@@ -178,6 +178,8 @@ var menubar = {
     handleNew: function(e){
 
       e.stopPropagation();
+      openmodal.currentOpenedFile = "";
+
       newmodal.init();
       newmodal.show();
       this.closeAllMenus();
@@ -188,7 +190,17 @@ var menubar = {
     handleSave: function(e){
       e.stopPropagation();
 
-      localStorage.setItem(openmodal.currentOpenedFile, editor.tfield.innerHTML);
+
+      if(!openmodal.currentOpenedFile){
+
+        this.handleSaveAs(e);
+
+      }
+      else{
+
+        localStorage.setItem(openmodal.currentOpenedFile, editor.tfield.innerHTML);
+
+      }
 
       this.closeAllMenus();
 
