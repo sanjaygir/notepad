@@ -238,13 +238,25 @@ var menubar = {
       let matches = editor.tfield.innerText.match(/[a-z]+@[a-z]+[.][a-z]+/g);
       let emails = "";
 
-      matches.forEach(function(v){
-        emails += v;
-        emails += "\n";
-      });
+
+      if(matches){
+        matches.forEach(function(v){
+          emails += v;
+          emails += "\n";
+        });
+        editor.tfield.innerText = emails;
+
+      }
+      else{
+
+        alert("No emails found!");
+
+      }
 
 
-      editor.tfield.innerText = emails;
+
+
+
 
     },
 
