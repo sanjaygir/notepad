@@ -150,6 +150,7 @@ var menubar = {
 
 
             this.el.querySelector('#emails').addEventListener("click", this.handleExtractEmails.bind(this));
+            this.el.querySelector('#money').addEventListener("click", this.handleExtractMoney.bind(this));
 
 
     },
@@ -253,10 +254,26 @@ var menubar = {
 
       }
 
+    },
 
+    handleExtractMoney: function(e){
 
+      let matches = editor.tfield.innerText.match(/\$\d+([.]\d+)?/g);
+      let money = "";
 
+      if(matches){
+        matches.forEach(function(v){
+          money += v;
+          money += "\n";
+        });
+        editor.tfield.innerText = money;
 
+      }
+      else{
+
+        alert("No money found!");
+
+      }
 
     },
 
