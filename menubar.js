@@ -25,35 +25,20 @@ var menubar = {
 
                       <ul class="dropmenu">
                           <li id="undo"> Undo </li>
-
-                          <!--
-                          <li id="cut"> Cut </li>
-                          <li> Copy </li>
-                          <li id="paste"> Paste </li>
-                          <li> Delete </li>
-                          -->
-
-
-                          <li id="find"> Find </li>
-
-
-                          <!--
-                          <li> Find Next </li>
-                          -->
-
                           <li> Replace </li>
                           <li> Go to </li>
                           <li> Select All </li>
                           <li> Time/Date </li>
-
                       </ul>
 
                     </li>
-                    <li>Format
+                    <li>Extract
 
                         <ul class="dropmenu">
-                            <li> Word Wrap </li>
-                            <li> Font </li>
+                            <li id="emails"> Emails </li>
+                            <li id="links"> Links </li>
+                            <li id="money"> Money </li>
+                            <li id="phone"> Phone Numbers </li>
 
                         </ul>
 
@@ -155,23 +140,16 @@ var menubar = {
 
 
             this.el.querySelector('#new').addEventListener("click", this.handleNew.bind(this));
-            this.el.querySelector('#saveas').addEventListener("click", this.handleSaveAs.bind(this));
-            this.el.querySelector('#save').addEventListener("click", this.handleSave.bind(this));
-
             this.el.querySelector('#open').addEventListener("click", this.handleOpen.bind(this));
-
+            this.el.querySelector('#save').addEventListener("click", this.handleSave.bind(this));
+            this.el.querySelector('#saveas').addEventListener("click", this.handleSaveAs.bind(this));
             this.el.querySelector('#exit').addEventListener("click", this.handleExit.bind(this));
 
+
             this.el.querySelector('#undo').addEventListener("click", this.handleUndo.bind(this));
-            this.el.querySelector('#find').addEventListener("click", this.handleFind.bind(this));
 
 
-    },
-    handleUndo: function(e){
-
-      e.stopPropagation();
-      editor.undo();
-      this.closeAllMenus();
+            this.el.querySelector('#emails').addEventListener("click", this.handleExtractEmails.bind(this));
 
 
     },
@@ -184,6 +162,17 @@ var menubar = {
       newmodal.show();
       this.closeAllMenus();
 
+
+    },
+    handleOpen: function(e){
+
+      e.stopPropagation();
+
+      openmodal.init();
+
+      openmodal.show();
+
+      this.closeAllMenus();
 
     },
 
@@ -220,29 +209,6 @@ var menubar = {
 
     },
 
-    handleFind: function(e){
-
-      e.stopPropagation();
-
-      findmodal.init();
-
-      findmodal.show();
-      findmodal.tfield.focus();
-
-      this.closeAllMenus();
-
-    },
-    handleOpen: function(e){
-
-      e.stopPropagation();
-
-      openmodal.init();
-
-      openmodal.show();
-
-      this.closeAllMenus();
-
-    },
     handleExit: function(e){
 
       e.stopPropagation();
@@ -257,6 +223,31 @@ var menubar = {
 
 
     },
+    handleUndo: function(e){
+
+      e.stopPropagation();
+      editor.undo();
+      this.closeAllMenus();
+
+
+    },
+
+    handleExtractEmails: function(e){
+
+
+      let matches = editor.tfield.innerText.match(/[a-z]+@[a-z]+[.][a-z]+/g);
+      let emails = "";
+
+      matches.forEach(function(v){
+        emails += v;
+        emails += "\n";
+      });
+
+
+      editor.tfield.innerText = emails;
+
+    },
+
     closeAllMenus: function(){
 
           let dropmenus = this.el.querySelectorAll(".dropmenu");
