@@ -5,10 +5,13 @@
 //initializations
 editor.init();
 
+/*
 newmodal.init();
 savemodal.init();
 openmodal.init();
 filtermodal.init();
+*/
+
 menubar.init();
 
 

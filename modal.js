@@ -15,7 +15,7 @@ let modal = {
 
         let temp = `
                 <div id="mheading">
-                    Open &nbsp;&nbsp;&nbsp;&nbsp;<span id="close">x</span>
+                    <span id="title"></span> &nbsp;&nbsp;&nbsp;&nbsp;<span id="close">x</span>
                 </div>
                 <div id = "mbody">
 

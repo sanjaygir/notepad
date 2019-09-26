@@ -32,6 +32,7 @@ savemodal.createView = function(){
 
           `;
 
+      document.querySelector('#modal #title').innerText = "Save As";
       document.querySelector('#modal #mbody').innerHTML = temp;
 
 }

@@ -1,7 +1,7 @@
 
-let filtermodal = Object.create(modal);
+let removemodal = Object.create(modal);
 
-filtermodal.init = function() {
+removemodal.init = function() {
 
     Object.getPrototypeOf(this).init();
 
@@ -13,41 +13,40 @@ filtermodal.init = function() {
 
 }
 
-
-filtermodal.createView = function(){
+removemodal.createView = function(){
 
   Object.getPrototypeOf(this).createView();
 
   let temp = `
           <input type"text" id="keyword"></input>
 
-          <button id="find">Filter</button>
+          <button id="remove">Remove Lines</button>
         `;
 
-    document.querySelector('#modal #title').innerText = "Filter";
+    document.querySelector('#modal #title').innerText = "Remove";
     document.querySelector('#modal #mbody').innerHTML = temp;
 
 }
 
 
-filtermodal.cacheDom = function() {
+removemodal.cacheDom = function() {
 
     Object.getPrototypeOf(this).cacheDom();
 
     this.tfield = this.el.querySelector('#keyword');
-    this.findbutton = this.el.querySelector("#find");
+    this.removebutton = this.el.querySelector("#remove");
 
 }
 
-filtermodal.bindEvents = function() {
+removemodal.bindEvents = function() {
 
     Object.getPrototypeOf(this).bindEvents();
 
-    this.findbutton.addEventListener("click", this.handleFilter.bind(this));
+    this.removebutton.addEventListener("click", this.handleRemove.bind(this));
 
 }
 
-filtermodal.handleFilter = function(){
+removemodal.handleRemove = function(){
 
     let keywrd = this.tfield.value;
     let text = editor.tfield.innerText;
@@ -57,7 +56,7 @@ filtermodal.handleFilter = function(){
     let lines = text.split("\n");
 
     lines.forEach(function(v){
-      if(v.includes(keywrd)){
+      if(!v.includes(keywrd)){
         filtered += v;
         filtered += "\n";
       }

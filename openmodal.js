@@ -53,6 +53,7 @@ openmodal.createView = function(){
 
           `;
 
+      document.querySelector('#modal #title').innerText = "Open";
       document.querySelector('#modal #mbody').innerHTML = temp;
 
 

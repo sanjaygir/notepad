@@ -27,6 +27,7 @@ let menubar = {
                           <li id="undo"> Undo </li>
                           <li id="split">Split</li>
                           <li id="filter">Filter</li>
+                          <li id="remove">Remove</li>
 
                           <li> Replace </li>
                           <li> Go to </li>
@@ -152,6 +153,8 @@ let menubar = {
             this.el.querySelector('#undo').addEventListener("click", this.handleUndo.bind(this));
             this.el.querySelector('#split').addEventListener("click", this.handleSplit.bind(this));
             this.el.querySelector('#filter').addEventListener("click", this.handleFilter.bind(this));
+            this.el.querySelector('#remove').addEventListener("click", this.handleRemove.bind(this));
+
 
 
             this.el.querySelector('#emails').addEventListener("click", this.handleExtractEmails.bind(this));
@@ -252,14 +255,22 @@ let menubar = {
     },
 
     handleFilter: function(e){
-
-
-
             e.stopPropagation();
 
             filtermodal.init();
 
             filtermodal.show();
+
+            this.closeAllMenus();
+
+
+    },
+    handleRemove: function(e){
+            e.stopPropagation();
+
+            removemodal.init();
+
+            removemodal.show();
 
             this.closeAllMenus();
 

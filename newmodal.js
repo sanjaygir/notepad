@@ -26,6 +26,7 @@ newmodal.createView = function(){
 
           `;
 
+      document.querySelector('#modal #title').innerText = "New";
       document.querySelector('#modal #mbody').innerHTML = temp;
 
 
