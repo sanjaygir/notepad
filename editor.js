@@ -1,4 +1,4 @@
-var editor = {
+let editor = {
     init: function() {
         this.createView();
         this.cacheDom();

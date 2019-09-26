@@ -1,5 +1,5 @@
 
-var menubar = {
+let menubar = {
     init: function() {
         this.createView();
         this.cacheDom();
@@ -267,7 +267,6 @@ var menubar = {
     },
 
     handleExtractEmails: function(e){
-
 
       let matches = editor.tfield.innerText.match(/[a-z]+@[a-z]+[.][a-z]+/g);
       let emails = "";
