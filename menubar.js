@@ -47,6 +47,19 @@ let menubar = {
                         </ul>
 
                     </li>
+
+
+                    <li>Cipher
+
+                          <ul class="dropmenu">
+                              <li id="encrypt"> Encrypt </li>
+                              <li id="decrypt"> Decrypt </li>
+
+                          </ul>
+
+
+                    </li>
+
                     <li>View
 
                           <ul class="dropmenu">
@@ -159,6 +172,12 @@ let menubar = {
 
             this.el.querySelector('#emails').addEventListener("click", this.handleExtractEmails.bind(this));
             this.el.querySelector('#money').addEventListener("click", this.handleExtractMoney.bind(this));
+
+
+
+            this.el.querySelector('#encrypt').addEventListener("click", this.handleEncrypt.bind(this));
+            this.el.querySelector('#decrypt').addEventListener("click", this.handleDecrypt.bind(this));
+
 
 
     },
@@ -317,6 +336,20 @@ let menubar = {
         alert("No money found!");
 
       }
+
+    },
+
+    handleEncrypt: function(e){
+
+
+        editor.tfield.innerText = cipher.encrypt(editor.tfield.innerText);
+
+
+    },
+    handleDecrypt: function(e){
+
+        editor.tfield.innerText = cipher.decrypt(editor.tfield.innerText).replace(/spacespace/g, " ");
+
 
     },
 
