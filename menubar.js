@@ -172,6 +172,8 @@ let menubar = {
 
             this.el.querySelector('#emails').addEventListener("click", this.handleExtractEmails.bind(this));
             this.el.querySelector('#money').addEventListener("click", this.handleExtractMoney.bind(this));
+            this.el.querySelector('#links').addEventListener("click", this.handleExtractLinks.bind(this));
+
 
 
 
@@ -334,6 +336,38 @@ let menubar = {
       else{
 
         alert("No money found!");
+
+      }
+
+    },
+
+    handleExtractLinks: function(e){
+
+      let hrefsdouble = editor.tfield.innerText.match(/href[\s]*=[\s]*"[^"]*"/g) || [];
+      let srcsdouble = editor.tfield.innerText.match(/src[\s]*=[\s]*"[^"]*"/g) || [];
+      let hrefssingle = editor.tfield.innerText.match(/href[\s]*=[\s]*'[^']*'/g) || [];
+      let srcssingle = editor.tfield.innerText.match(/src[\s]*=[\s]*'[^']*'/g) || [];
+
+      let links = [];
+
+      links = hrefsdouble.concat(srcsdouble.concat(hrefssingle.concat(srcssingle)));
+
+
+      let money = "";
+
+        if(links.length > 0){
+
+          links.forEach(function(v){
+            money += v;
+            money += "\n";
+          });
+
+        editor.tfield.innerText = money;
+
+      }
+      else{
+
+        alert("No links found!");
 
       }
 
