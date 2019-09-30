@@ -30,9 +30,10 @@ let menubar = {
                           <li id="remove">Remove</li>
 
                           <li> Replace </li>
-                          <li> Go to </li>
-                          <li> Select All </li>
+                          <li id="sorta"> Sort Asc </li>
+                          <li id="sortd"> Sort Desc </li>
                           <li> Time/Date </li>
+
                       </ul>
 
                     </li>
@@ -167,6 +168,8 @@ let menubar = {
             this.el.querySelector('#split').addEventListener("click", this.handleSplit.bind(this));
             this.el.querySelector('#filter').addEventListener("click", this.handleFilter.bind(this));
             this.el.querySelector('#remove').addEventListener("click", this.handleRemove.bind(this));
+            this.el.querySelector('#sorta').addEventListener("click", this.handleSortAscending.bind(this));
+            this.el.querySelector('#sortd').addEventListener("click", this.handleSortDescending.bind(this));
 
 
 
@@ -294,6 +297,51 @@ let menubar = {
             removemodal.show();
 
             this.closeAllMenus();
+
+
+    },
+
+
+    handleSortAscending: function(e){
+
+
+          let text = editor.tfield.innerText;
+
+          let filtered = "";
+
+          let lines = text.split("\n").sort();
+
+          lines.forEach(function(v){
+
+              filtered += v;
+              filtered += "\n";
+
+          });
+
+          editor.tfield.innerText = filtered;
+
+
+
+
+    },
+
+
+    handleSortDescending: function(e){
+
+            let text = editor.tfield.innerText;
+
+            let filtered = "";
+
+            let lines = text.split("\n").sort().reverse();
+
+            lines.forEach(function(v){
+
+                filtered += v;
+                filtered += "\n";
+
+            });
+
+            editor.tfield.innerText = filtered;
 
 
     },
