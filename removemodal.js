@@ -19,11 +19,45 @@ removemodal.createView = function(){
 
   let temp = `
 
-          <input type"text" id="keyword"></input>
-          <button id="remove">Remove</button> <br><br>
 
-          <input type"text" id="keywordl"></input>
-          <button id="removel">Remove Lines</button> <br>
+          <table>
+
+          <tr>
+
+            <td><button id="remove">Remove</button></td>
+
+            <td><input type"text" id="keyword" placeholder="containing"></input> from </td>
+
+            <td>
+              <label><input type="radio" name="removetype" id="removestart"> Start of Line </label>
+              <label><input type="radio" name="removetype" id="removeend"> End of Line </label>
+              <label><input type="radio" name="removetype" id="removeanywhere"> Anywhere </label>
+            </td>
+
+
+
+          </tr>
+
+          <tr>
+
+            <td><button id="removel">Remove Lines</button></td>
+
+            <td><input type"text" id="keywordl" placeholder="containing"></input> from </td>
+
+            <td>
+              <label><input type="radio" name="removelinetype" id="removelinestart"> Start of Line </label>
+              <label><input type="radio" name="removelinetype" id="removelineend"> End of Line </label>
+              <label><input type="radio" name="removelinetype" id="removelineanywhere"> Anywhere </label>
+            </td>
+
+          </tr>
+
+
+
+
+
+
+          </table>
 
         `;
 
@@ -37,11 +71,18 @@ removemodal.cacheDom = function() {
 
     Object.getPrototypeOf(this).cacheDom();
 
-    this.tfieldl = this.el.querySelector('#keywordl');
     this.tfield = this.el.querySelector('#keyword');
-
-    this.removelbutton = this.el.querySelector("#removel");
     this.removebutton = this.el.querySelector("#remove");
+    this.rstart = this.el.querySelector("#removestart");
+    this.rend = this.el.querySelector("#removeend");
+    this.ranywhere = this.el.querySelector("#removeanywhere");
+
+
+    this.tfieldl = this.el.querySelector('#keywordl');
+    this.removelbutton = this.el.querySelector("#removel");
+    this.rlstart = this.el.querySelector("#removelinestart");
+    this.rlend = this.el.querySelector("#removelineend");
+    this.rlanywhere = this.el.querySelector("#removelineanywhere");
 
 
 }
@@ -55,6 +96,58 @@ removemodal.bindEvents = function() {
 
 }
 
+
+
+removemodal.handleRemove = function(){
+
+
+      let keywrd = this.tfield.value;
+      let text = editor.tfield.innerText;
+
+      let filtered = "";
+
+      let lines = text.split("\n");
+
+      if(this.rstart.checked){
+
+            lines.forEach(function(v){
+
+                filtered += v.replace(new RegExp("^" + keywrd, "g"), "");
+                filtered += "\n";
+
+            });
+      }
+      else if(this.rend.checked){
+
+            lines.forEach(function(v){
+
+                filtered += v.replace(new RegExp(keywrd + "$", "g"), "");
+                filtered += "\n";
+
+            });
+
+      }
+      else if(this.ranywhere.checked){
+
+            lines.forEach(function(v){
+
+                filtered += v.replace(new RegExp(keywrd, "g"), "");
+                filtered += "\n";
+
+            });
+
+      }
+
+
+      editor.tfield.innerText = filtered;
+
+
+
+
+}
+
+
+
 removemodal.handleRemoveLine = function(){
 
     let keywrd = this.tfieldl.value;
@@ -64,26 +157,38 @@ removemodal.handleRemoveLine = function(){
 
     let lines = text.split("\n");
 
-    lines.forEach(function(v){
-      if(!v.includes(keywrd)){
-        filtered += v;
-        filtered += "\n";
-      }
-    });
+    if(this.rlstart.checked){
+
+          lines.forEach(function(v){
+            if(!v.startsWith(keywrd)){
+              filtered += v;
+              filtered += "\n";
+            }
+          });
+    }
+    else if(this.rlend.checked){
+
+          lines.forEach(function(v){
+            if(!v.endsWith(keywrd)){
+              filtered += v;
+              filtered += "\n";
+            }
+          });
+
+    }
+    else if(this.rlanywhere.checked){
+
+
+          lines.forEach(function(v){
+            if(!v.includes(keywrd)){
+              filtered += v;
+              filtered += "\n";
+            }
+          });
+
+    }
+
 
     editor.tfield.innerText = filtered;
-
-
-}
-
-removemodal.handleRemove = function(){
-
-      let keywrd = this.tfield.value;
-
-      let text = editor.tfield.innerText;
-
-      let replaced = text.replace(new RegExp(keywrd, "g"), "");
-
-      editor.tfield.innerText = replaced;
 
 }
