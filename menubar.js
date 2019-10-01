@@ -29,7 +29,7 @@ let menubar = {
                           <li id="filter">Filter</li>
                           <li id="remove">Remove</li>
 
-                          <li> Replace </li>
+                          <li id="replace"> Replace </li>
                           <li id="sorta"> Sort Asc </li>
                           <li id="sortd"> Sort Desc </li>
                           <li> Time/Date </li>
@@ -168,6 +168,8 @@ let menubar = {
             this.el.querySelector('#split').addEventListener("click", this.handleSplit.bind(this));
             this.el.querySelector('#filter').addEventListener("click", this.handleFilter.bind(this));
             this.el.querySelector('#remove').addEventListener("click", this.handleRemove.bind(this));
+            this.el.querySelector('#replace').addEventListener("click", this.handleReplace.bind(this));
+
             this.el.querySelector('#sorta').addEventListener("click", this.handleSortAscending.bind(this));
             this.el.querySelector('#sortd').addEventListener("click", this.handleSortDescending.bind(this));
 
@@ -300,7 +302,17 @@ let menubar = {
 
 
     },
+    handleReplace: function(e){
+            e.stopPropagation();
 
+            replacemodal.init();
+
+            replacemodal.show();
+
+            this.closeAllMenus();
+
+
+    },
 
     handleSortAscending: function(e){
 
