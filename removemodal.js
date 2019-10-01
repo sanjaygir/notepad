@@ -104,7 +104,7 @@ removemodal.handleRemove = function(){
       let keywrd = this.tfield.value;
       let text = editor.tfield.innerText;
 
-      let filtered = "";
+      let removed = "";
 
       let lines = text.split("\n");
 
@@ -112,8 +112,8 @@ removemodal.handleRemove = function(){
 
             lines.forEach(function(v){
 
-                filtered += v.replace(new RegExp("^" + keywrd, "g"), "");
-                filtered += "\n";
+                removed += v.replace(new RegExp("^" + keywrd, "g"), "");
+                removed += "\n";
 
             });
       }
@@ -121,8 +121,8 @@ removemodal.handleRemove = function(){
 
             lines.forEach(function(v){
 
-                filtered += v.replace(new RegExp(keywrd + "$", "g"), "");
-                filtered += "\n";
+                removed += v.replace(new RegExp(keywrd + "$", "g"), "");
+                removed += "\n";
 
             });
 
@@ -131,15 +131,15 @@ removemodal.handleRemove = function(){
 
             lines.forEach(function(v){
 
-                filtered += v.replace(new RegExp(keywrd, "g"), "");
-                filtered += "\n";
+                removed += v.replace(new RegExp(keywrd, "g"), "");
+                removed += "\n";
 
             });
 
       }
 
 
-      editor.tfield.innerText = filtered;
+      editor.tfield.innerText = removed;
 
 
 
@@ -153,7 +153,7 @@ removemodal.handleRemoveLine = function(){
     let keywrd = this.tfieldl.value;
     let text = editor.tfield.innerText;
 
-    let filtered = "";
+    let removed = "";
 
     let lines = text.split("\n");
 
@@ -161,8 +161,8 @@ removemodal.handleRemoveLine = function(){
 
           lines.forEach(function(v){
             if(!v.startsWith(keywrd)){
-              filtered += v;
-              filtered += "\n";
+              removed += v;
+              removed += "\n";
             }
           });
     }
@@ -170,8 +170,8 @@ removemodal.handleRemoveLine = function(){
 
           lines.forEach(function(v){
             if(!v.endsWith(keywrd)){
-              filtered += v;
-              filtered += "\n";
+              removed += v;
+              removed += "\n";
             }
           });
 
@@ -181,14 +181,14 @@ removemodal.handleRemoveLine = function(){
 
           lines.forEach(function(v){
             if(!v.includes(keywrd)){
-              filtered += v;
-              filtered += "\n";
+              removed += v;
+              removed += "\n";
             }
           });
 
     }
 
 
-    editor.tfield.innerText = filtered;
+    editor.tfield.innerText = removed;
 
 }

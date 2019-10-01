@@ -19,23 +19,21 @@ replacemodal.createView = function(){
 
   let temp = `
 
-
           <table>
 
           <tr>
 
-            <td><button id="remove">Replace</button></td>
+            <td><button id="replace">Replace</button></td>
 
             <td><input type"text" id="keyword" placeholder="containing"></input> from </td>
 
             <td>
-              <label><input type="radio" name="removetype" id="removestart"> Start of Line </label>
-              <label><input type="radio" name="removetype" id="removeend"> End of Line </label>
-              <label><input type="radio" name="removetype" id="removeanywhere"> Anywhere </label>
+              <label><input type="radio" name="replacetype" id="replacestart"> Start of Line </label>
+              <label><input type="radio" name="replacetype" id="replaceend"> End of Line </label>
+              <label><input type="radio" name="replacetype" id="replaceanywhere"> Anywhere </label>
             </td>
 
             <td>to <input type"text" id="replacetext"></input></td>
-
 
 
           </tr>
@@ -57,10 +55,10 @@ replacemodal.cacheDom = function() {
     Object.getPrototypeOf(this).cacheDom();
 
     this.tfield = this.el.querySelector('#keyword');
-    this.removebutton = this.el.querySelector("#remove");
-    this.rstart = this.el.querySelector("#removestart");
-    this.rend = this.el.querySelector("#removeend");
-    this.ranywhere = this.el.querySelector("#removeanywhere");
+    this.replacebutton = this.el.querySelector("#replace");
+    this.rstart = this.el.querySelector("#replacestart");
+    this.rend = this.el.querySelector("#replaceend");
+    this.ranywhere = this.el.querySelector("#replaceanywhere");
 
     this.replacetext = this.el.querySelector('#replacetext');
 
@@ -71,19 +69,17 @@ replacemodal.bindEvents = function() {
 
     Object.getPrototypeOf(this).bindEvents();
 
-    this.removebutton.addEventListener("click", this.handleRemove.bind(this));
+    this.replacebutton.addEventListener("click", this.handleReplace.bind(this));
 
 }
 
-
-
-replacemodal.handleRemove = function(){
+replacemodal.handleReplace = function(){
 
       let keywrd = this.tfield.value;
       let text = editor.tfield.innerText;
       let replacetext = this.replacetext.value;
 
-      let filtered = "";
+      let replaced = "";
 
       let lines = text.split("\n");
 
@@ -91,8 +87,8 @@ replacemodal.handleRemove = function(){
 
             lines.forEach(function(v){
 
-                filtered += v.replace(new RegExp("^" + keywrd, "g"), replacetext);
-                filtered += "\n";
+                replaced += v.replace(new RegExp("^" + keywrd, "g"), replacetext);
+                replaced += "\n";
 
             });
       }
@@ -100,8 +96,8 @@ replacemodal.handleRemove = function(){
 
             lines.forEach(function(v){
 
-                filtered += v.replace(new RegExp(keywrd + "$", "g"), replacetext);
-                filtered += "\n";
+                replaced += v.replace(new RegExp(keywrd + "$", "g"), replacetext);
+                replaced += "\n";
 
             });
 
@@ -110,15 +106,15 @@ replacemodal.handleRemove = function(){
 
             lines.forEach(function(v){
 
-                filtered += v.replace(new RegExp(keywrd, "g"), replacetext);
-                filtered += "\n";
+                replaced += v.replace(new RegExp(keywrd, "g"), replacetext);
+                replaced += "\n";
 
             });
 
       }
 
 
-      editor.tfield.innerText = filtered;
+      editor.tfield.innerText = replaced;
 
 
 
