@@ -316,21 +316,20 @@ let menubar = {
 
     handleSortAscending: function(e){
 
-
           let text = editor.tfield.innerText;
 
-          let filtered = "";
+          let sorted = "";
 
           let lines = text.split("\n").sort();
 
           lines.forEach(function(v){
 
-              filtered += v;
-              filtered += "\n";
+              sorted += v;
+              sorted += "\n";
 
           });
 
-          editor.tfield.innerText = filtered;
+          editor.tfield.innerText = sorted;
 
 
 
@@ -342,18 +341,18 @@ let menubar = {
 
             let text = editor.tfield.innerText;
 
-            let filtered = "";
+            let sorted = "";
 
             let lines = text.split("\n").sort().reverse();
 
             lines.forEach(function(v){
 
-                filtered += v;
-                filtered += "\n";
+                sorted += v;
+                sorted += "\n";
 
             });
 
-            editor.tfield.innerText = filtered;
+            editor.tfield.innerText = sorted;
 
 
     },
@@ -403,26 +402,25 @@ let menubar = {
 
     handleExtractLinks: function(e){
 
-      let hrefsdouble = editor.tfield.innerText.match(/href[\s]*=[\s]*"[^"]*"/g) || [];
-      let srcsdouble = editor.tfield.innerText.match(/src[\s]*=[\s]*"[^"]*"/g) || [];
-      let hrefssingle = editor.tfield.innerText.match(/href[\s]*=[\s]*'[^']*'/g) || [];
-      let srcssingle = editor.tfield.innerText.match(/src[\s]*=[\s]*'[^']*'/g) || [];
+      let hrefsdouble = Array.from(editor.tfield.innerText.matchAll(/href[\s]*=[\s]*"([^"]*)"/g)) || [];
+      let srcsdouble = Array.from(editor.tfield.innerText.matchAll(/src[\s]*=[\s]*"([^"]*)"/g)) || [];
+      let hrefssingle = Array.from(editor.tfield.innerText.matchAll(/href[\s]*=[\s]*'([^']*)'/g)) || [];
+      let srcssingle = Array.from(editor.tfield.innerText.matchAll(/src[\s]*=[\s]*'([^']*)'/g)) || [];
 
       let links = [];
 
       links = hrefsdouble.concat(srcsdouble.concat(hrefssingle.concat(srcssingle)));
 
-
-      let money = "";
+      let linksstr = "";
 
         if(links.length > 0){
 
           links.forEach(function(v){
-            money += v;
-            money += "\n";
+            linksstr += v[1];
+            linksstr += "\n";
           });
 
-        editor.tfield.innerText = money;
+        editor.tfield.innerText = linksstr;
 
       }
       else{
