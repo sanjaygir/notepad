@@ -55,8 +55,7 @@ let menubar = {
                             <li id="emails"> Emails </li>
                             <li id="links"> Links </li>
                             <li id="money"> Money </li>
-                            <li id="phone"> Phone Numbers </li>
-
+                            <li id="table"> Table </li>
                         </ul>
 
                     </li>
@@ -194,6 +193,7 @@ let menubar = {
             this.el.querySelector('#emails').addEventListener("click", this.handleExtractEmails.bind(this));
             this.el.querySelector('#money').addEventListener("click", this.handleExtractMoney.bind(this));
             this.el.querySelector('#links').addEventListener("click", this.handleExtractLinks.bind(this));
+            this.el.querySelector('#table').addEventListener("click", this.handleExtractTable.bind(this));
 
 
 
@@ -459,6 +459,33 @@ let menubar = {
       }
 
     },
+
+
+
+    handleExtractTable: function(e){
+
+      let lines = "";
+
+      let d = document.createElement('div');
+
+      d.innerHTML = editor.tfield.innerText;
+
+
+      let s = d.querySelectorAll('table tr');
+
+      s.forEach(function(v){
+
+        lines += v.innerText.trim().split("\n").join(",");
+        lines += "\n";
+
+      });
+
+
+      editor.tfield.innerText = lines;
+
+
+    },
+
 
     handleEncrypt: function(e){
 

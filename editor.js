@@ -9,7 +9,7 @@ let editor = {
     },
     createView: function(){
 
-      let temp = `<div id = "tarea" contenteditable="true" style="word-break: break-all; height: 400px; overflow:scroll;"></div><p id="status"></p>`;
+      let temp = `<div id = "tarea" contenteditable="true" style="word-break: break-all; height: 600px; overflow:scroll;"></div><p id="status"></p>`;
 
         document.querySelector('#editor').innerHTML = temp;
 
