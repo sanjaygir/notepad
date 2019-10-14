@@ -37,6 +37,18 @@ let menubar = {
                       </ul>
 
                     </li>
+
+                    <li>Font
+
+                      <ul class="dropmenu">
+                          <li id="fontup"> Increase Size </li>
+                          <li id="fontdown"> Decrease Size </li>
+                      </ul>
+
+                    </li>
+
+
+
                     <li>Extract
 
                         <ul class="dropmenu">
@@ -172,6 +184,10 @@ let menubar = {
 
             this.el.querySelector('#sorta').addEventListener("click", this.handleSortAscending.bind(this));
             this.el.querySelector('#sortd').addEventListener("click", this.handleSortDescending.bind(this));
+
+
+            this.el.querySelector('#fontup').addEventListener("click", this.handleIncreaseFont.bind(this));
+            this.el.querySelector('#fontdown').addEventListener("click", this.handleDecreaseFont.bind(this));
 
 
 
@@ -354,6 +370,19 @@ let menubar = {
 
             editor.tfield.innerText = sorted;
 
+
+    },
+
+
+    handleIncreaseFont: function(e){
+
+      editor.tfield.style.fontSize = (parseInt(editor.tfield.style.fontSize) + 2) + "px";
+
+    },
+
+    handleDecreaseFont: function(e){
+
+      editor.tfield.style.fontSize = (parseInt(editor.tfield.style.fontSize) - 2) + "px";
 
     },
 

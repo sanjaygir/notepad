@@ -21,7 +21,7 @@ let editor = {
     },
     setStyles: function(){
 
-        this.tfield.style.fontSize = "20px";
+        this.tfield.style.fontSize = "18px";
         this.tfield.style.lineHeight = 1;
 
     },
