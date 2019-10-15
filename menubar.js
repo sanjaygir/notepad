@@ -27,6 +27,7 @@ let menubar = {
                           <li id="undo"> Undo </li>
                           <li id="split">Split</li>
                           <li id="filter">Filter</li>
+                          <li id="unique">Unique</li>
                           <li id="remove">Remove</li>
 
                           <li id="replace"> Replace </li>
@@ -178,6 +179,8 @@ let menubar = {
             this.el.querySelector('#undo').addEventListener("click", this.handleUndo.bind(this));
             this.el.querySelector('#split').addEventListener("click", this.handleSplit.bind(this));
             this.el.querySelector('#filter').addEventListener("click", this.handleFilter.bind(this));
+            this.el.querySelector('#unique').addEventListener("click", this.handleUnique.bind(this));
+
             this.el.querySelector('#remove').addEventListener("click", this.handleRemove.bind(this));
             this.el.querySelector('#replace').addEventListener("click", this.handleReplace.bind(this));
 
@@ -307,6 +310,27 @@ let menubar = {
 
 
     },
+
+    handleUnique: function(e){
+
+      let text = editor.tfield.innerText;
+
+      let unique = "";
+
+      let lines = Array.from(new Set(text.split("\n")));
+
+      lines.forEach(function(v){
+
+          unique += v;
+          unique += "\n";
+
+      });
+
+      editor.tfield.innerText = unique;
+
+
+    },
+
     handleRemove: function(e){
             e.stopPropagation();
 

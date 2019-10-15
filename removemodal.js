@@ -42,7 +42,7 @@ removemodal.createView = function(){
 
             <td><button id="removel">Remove Lines</button></td>
 
-            <td><input type"text" id="keywordl" placeholder="containing"></input> from </td>
+            <td><label for = "not"> Not  <input type="checkbox" id="not"> </label> <input type"text" id="keywordl" placeholder="containing"></input> from </td>
 
             <td>
               <label><input type="radio" name="removelinetype" id="removelinestart"> Start of Line </label>
@@ -83,6 +83,9 @@ removemodal.cacheDom = function() {
     this.rlstart = this.el.querySelector("#removelinestart");
     this.rlend = this.el.querySelector("#removelineend");
     this.rlanywhere = this.el.querySelector("#removelineanywhere");
+    this.not = this.el.querySelector('#not');
+
+
 
 
 }
@@ -150,6 +153,10 @@ removemodal.handleRemove = function(){
 
 removemodal.handleRemoveLine = function(){
 
+
+    let notContaining = this.not.checked;
+
+
     let keywrd = this.tfieldl.value;
     let text = editor.tfield.innerText;
 
@@ -157,36 +164,82 @@ removemodal.handleRemoveLine = function(){
 
     let lines = text.split("\n");
 
-    if(this.rlstart.checked){
 
-          lines.forEach(function(v){
-            if(!v.startsWith(keywrd)){
-              removed += v;
-              removed += "\n";
-            }
-          });
+    if(notContaining){
+
+
+      if(this.rlstart.checked){
+
+            lines.forEach(function(v){
+              if(v.startsWith(keywrd)){
+                removed += v;
+                removed += "\n";
+              }
+            });
+      }
+      else if(this.rlend.checked){
+
+            lines.forEach(function(v){
+              if(v.endsWith(keywrd)){
+                removed += v;
+                removed += "\n";
+              }
+            });
+
+      }
+      else if(this.rlanywhere.checked){
+
+
+            lines.forEach(function(v){
+              if(v.includes(keywrd)){
+                removed += v;
+                removed += "\n";
+              }
+            });
+      
+      }
+
+
     }
-    else if(this.rlend.checked){
+    else{
 
-          lines.forEach(function(v){
-            if(!v.endsWith(keywrd)){
-              removed += v;
-              removed += "\n";
-            }
-          });
+
+
+      if(this.rlstart.checked){
+
+            lines.forEach(function(v){
+              if(!v.startsWith(keywrd)){
+                removed += v;
+                removed += "\n";
+              }
+            });
+      }
+      else if(this.rlend.checked){
+
+            lines.forEach(function(v){
+              if(!v.endsWith(keywrd)){
+                removed += v;
+                removed += "\n";
+              }
+            });
+
+      }
+      else if(this.rlanywhere.checked){
+
+
+            lines.forEach(function(v){
+              if(!v.includes(keywrd)){
+                removed += v;
+                removed += "\n";
+              }
+            });
+
+      }
+
 
     }
-    else if(this.rlanywhere.checked){
 
 
-          lines.forEach(function(v){
-            if(!v.includes(keywrd)){
-              removed += v;
-              removed += "\n";
-            }
-          });
-
-    }
 
 
     editor.tfield.innerText = removed;
