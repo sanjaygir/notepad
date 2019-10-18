@@ -162,6 +162,8 @@ let menubar = {
         dcontentsas[i].style.float = "none";
         dcontentsas[i].style.display = "block";
         dcontentsas[i].style.color = "black";
+        dcontentsas[i].style.backgroundColor = "white";
+
 
 
       }
