@@ -8,93 +8,114 @@ let menubar = {
     },
     createView: function(){
 
-      let temp = `
-                <ul class="bar">
-                    <li>File
-                      <ul class="dropmenu">
-                          <li id="new"> New </li>
-                          <li id="open"> Open </li>
-                          <li id="save"> Save </li>
-                          <li id="saveas"> Save As </li>
-                          <li id="exit"> Exit </li>
-                      </ul>
+            let temp = `
 
-                    </li>
+                  <div class="drop">
+                      <a href="#">File</a>
+                      <div class="drop-content">
 
-                    <li>Edit
+                        <a href="#" id="new"> New </a>
+                        <a href="#" id="open"> Open </a>
+                        <a href="#" id="save"> Save </a>
+                        <a href="#" id="saveas"> Save As </a>
+                        <a href="#" id="exit"> Exit </a>
 
-                      <ul class="dropmenu">
-                          <li id="undo"> Undo </li>
-                          <li id="split">Split</li>
-                          <li id="filter">Filter</li>
-                          <li id="unique">Unique</li>
-                          <li id="remove">Remove</li>
+                      </div>
 
-                          <li id="replace"> Replace </li>
-                          <li id="sorta"> Sort Asc </li>
-                          <li id="sortd"> Sort Desc </li>
-                          <li> Time/Date </li>
+                  </div>
 
-                      </ul>
+                    <div class="drop">
+                        <a href="#">Edit</a>
+                        <div class="drop-content">
 
-                    </li>
+                          <a href="#" id="undo"> Undo </a>
+                          <a href="#" id="split">Split</a>
+                          <a href="#" id="filter">Filter</a>
+                          <a href="#" id="unique">Unique</a>
+                          <a href="#" id="remove">Remove</a>
 
-                    <li>Font
+                          <a href="#" id="replace"> Replace </a>
+                          <a href="#" id="sorta"> Sort Asc </a>
+                          <a href="#" id="sortd"> Sort Desc </a>
+                          <a href="#" > Time/Date </a>
 
-                      <ul class="dropmenu">
-                          <li id="fontup"> Increase Size </li>
-                          <li id="fontdown"> Decrease Size </li>
-                      </ul>
+                        </div>
 
-                    </li>
+                    </div>
 
 
 
-                    <li>Extract
 
-                        <ul class="dropmenu">
-                            <li id="emails"> Emails </li>
-                            <li id="links"> Links </li>
-                            <li id="money"> Money </li>
-                            <li id="table"> Table </li>
-                        </ul>
+                    <div class="drop">
+                        <a href="#">Font</a>
+                        <div class="drop-content">
 
-                    </li>
+                          <a href="#" id="fontdown"> Decrease Size </a>
+                          <a href="#" id="fontup"> Increase Size </a>
 
 
-                    <li>Cipher
+                        </div>
 
-                          <ul class="dropmenu">
-                              <li id="encrypt"> Encrypt </li>
-                              <li id="decrypt"> Decrypt </li>
-
-                          </ul>
+                    </div>
 
 
-                    </li>
 
-                    <li>View
+                    <div class="drop">
+                        <a href="#">Extract</a>
+                        <div class="drop-content">
 
-                          <ul class="dropmenu">
-                              <li> Status Bar </li>
+                          <a href="#" id="emails"> Emails </a>
+                          <a href="#" id="links"> Links </a>
+                          <a href="#" id="money"> Money </a>
+                          <a href="#" id="table"> Table </a>
 
-                          </ul>
+
+                        </div>
+
+                    </div>
 
 
-                    </li>
-                    <li>Help
 
-                          <ul class="dropmenu">
-                              <li> View Help </li>
+                      <div class="drop">
+                          <a href="#">Cipher</a>
+                          <div class="drop-content">
 
-                              <li> About Notepad </li>
+                              <a href="#" id="encrypt"> Encrypt </a>
+                              <a href="#" id="decrypt"> Decrypt </a>
 
-                          </ul>
 
-                    </li>
-                </ul>
+                          </div>
 
-      `;
+                      </div>
+
+
+
+                      <div class="drop">
+                          <a href="#">Table</a>
+                          <div class="drop-content">
+
+                              <a href="#"> Extract Column/s </a>
+
+
+                          </div>
+
+                      </div>
+
+
+                        <div class="drop">
+                            <a href="#">Help</a>
+                            <div class="drop-content">
+
+                                <a href="#"> View Help </a>
+
+                                <a href="#"> About Notepad </a>
+
+
+                            </div>
+
+                        </div>
+
+            `;
 
       document.querySelector('#menubar').innerHTML = temp;
 
@@ -105,67 +126,89 @@ let menubar = {
     },
     setStyles: function(){
 
-      let uls = this.el.querySelectorAll('ul');
-      for(let i=0; i<uls.length; i++){
-        uls[i].style.listStyleType = "none";
+      this.el.style.backgroundColor = "#333";
+      this.el.style.fontFamily = "Arial";
+      //this.el.style.overflow = "hidden";
+
+
+      let as = this.el.querySelectorAll('a');
+      for(let i=0; i<as.length; i++){
+        as[i].style.textDecoration = "none";
+        as[i].style.float = "left";
+        as[i].style.padding = "10px";
+        as[i].style.color = "white";
+        as[i].style.fontSize = "20px";
       }
 
-      let lis = this.el.querySelectorAll('ul.bar > li');
-      for(let i = 0; i < lis.length; i ++ ){
-        lis[i].style.float = "left";
-        lis[i].style.padding = "20px";
-        lis[i].style.cursor = "default";
+
+      let drops = this.el.querySelectorAll('.drop');
+      for(let i=0; i<drops.length; i++){
+        drops[i].style.float = "left";
+      }
+
+      let dcontents = this.el.querySelectorAll('.drop .drop-content');
+      for(let i=0; i<dcontents.length; i++){
+        dcontents[i].style.display = "none";
+        dcontents[i].style.position = "absolute";
+        dcontents[i].style.top = "45px";
+
+      }
+
+
+
+      let dcontentsas = this.el.querySelectorAll('.drop .drop-content a');
+      for(let i=0; i<dcontentsas.length; i++){
+        dcontentsas[i].style.width = "100px";
+        dcontentsas[i].style.float = "none";
+        dcontentsas[i].style.display = "block";
+        dcontentsas[i].style.color = "black";
 
 
       }
 
-      let dropmenus = this.el.querySelectorAll(".dropmenu");
-      for(let i = 0; i < dropmenus.length; i ++ ){
-        dropmenus[i].style.display = "none";
-      }
+
 
     },
     bindEvents: function() {
 
-            let lis = this.el.querySelectorAll('ul.bar > li');
-            for(let i = 0; i < lis.length; i ++ ){
 
-              lis[i].addEventListener("mouseover", function(e){
+      let dcontentshover = this.el.querySelectorAll('.drop');
+      for(let i=0; i<dcontentshover.length; i++){
 
-                this.displayMenu(i);
+        dcontentshover[i].addEventListener("mouseover", function(e){
 
+          this.querySelector('.drop-content').style.display = "block";
 
-              }.bind(this));
+        });
 
+        dcontentshover[i].addEventListener("mouseout", function(e){
 
-              lis[i].addEventListener("mouseout", function(e){
+          this.querySelector('.drop-content').style.display = "none";
 
+        });
 
-                this.closeMenu(i);
-
-              }.bind(this));
-
-            }
+      }
 
 
-            let droplis = this.el.querySelectorAll('ul.dropmenu > li');
 
-            for(let i = 0; i < droplis.length; i ++ ){
+      let contentlinks = this.el.querySelectorAll('.drop-content a');
+      for(let i=0; i<contentlinks.length; i++){
+        //dcontentshover[i].style.display = "block";
 
-                droplis[i].addEventListener("mouseover", function(e){
+        contentlinks[i].addEventListener("mouseover", function(e){
 
-                  this.style.backgroundColor = "grey";
-                  this.style.cursor = "default";
+          this.style.backgroundColor = "#ddd";
 
-                });
-                droplis[i].addEventListener("mouseout", function(e){
+        });
 
-                  this.style.backgroundColor = "white";
+        contentlinks[i].addEventListener("mouseout", function(e){
 
-                });
+          this.style.backgroundColor = "white";
 
+        });
 
-            }
+      }
+
 
 
 
