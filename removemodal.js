@@ -196,7 +196,7 @@ removemodal.handleRemoveLine = function(){
                 removed += "\n";
               }
             });
-      
+
       }
 
 

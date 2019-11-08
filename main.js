@@ -2,28 +2,38 @@
 
 
 
-//initializations
-editor.init();
 
-/*
-newmodal.init();
-savemodal.init();
-openmodal.init();
-filtermodal.init();
-*/
-
-menubar.init();
+document.addEventListener('DOMContentLoaded', (event) => {
+  //the event occurred
 
 
 
-document.addEventListener("click", function(e){
+  //initializations
+  editor.init();
 
-  if(e.target.tagName != "LI"){
+  /*
+  newmodal.init();
+  savemodal.init();
+  openmodal.init();
+  filtermodal.init();
+  */
+
+  menubar.init();
 
 
-    menubar.closeAllMenus();
 
-  }
+  document.addEventListener("click", function(e){
+
+    if(e.target.tagName != "LI"){
+
+
+      menubar.closeAllMenus();
+
+    }
+
+
+  });
+
 
 
 });
